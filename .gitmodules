@@ -47,3 +47,6 @@
 [submodule "plugins/reports/counter/classes/COUNTER"]
 	path = plugins/reports/counter/classes/COUNTER
 	url = https://github.com/ulsdevteam/COUNTER.git
+[submodule "plugins/themes/rcvs-bootstrap"]
+	path = plugins/themes/rcvs-bootstrap
+	url = git@github.com:RCVS-London/trust-ojs-bootstrap3-theme.git
