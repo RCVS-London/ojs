@@ -114,6 +114,8 @@ class OldGreggThemePlugin extends ThemePlugin
 		HookRegistry::register('TemplateManager::display', array($this, 'browseLatest'), HOOK_SEQUENCE_CORE);
 		HookRegistry::register('TemplateManager::display', array($this, 'latestIssuesSlider'), HOOK_SEQUENCE_NORMAL);
 		HookRegistry::register('TemplateManager::display', array($this, 'journalDescription'), HOOK_SEQUENCE_NORMAL);
+
+		HookRegistry::register('TemplateManager::display',array($this, 'getLatestIssue'));
 	}
 
 
@@ -450,9 +452,19 @@ class OldGreggThemePlugin extends ThemePlugin
 		$smarty->assign('showSummary', $showSummary);
 	}
 
-	public function getLatestIssue() {
-		$issueService = Services::get('issue');
-		$issues = $issueService->getIssues();
+	public function getLatestIssue($hookName, $args) {
+		$smarty = $args[0];
+		$template = $args[1];
+
+		$request = $this->getRequest();
+		$journal = $request->getJournal();
+		$journalId = $journal->getId();
+
+		$issueDao = DAORegistry::getDAO('IssueDAO');
+		$rangeIssues = new DBResultRange(1, 1);
+		$latestIssuesObjects = $issueDao->getPublishedIssues($journalId, $rangeIssues);
+
+		$smarty->assign('latestIssue', $latestIssuesObjects->next());
 	}
 
 }

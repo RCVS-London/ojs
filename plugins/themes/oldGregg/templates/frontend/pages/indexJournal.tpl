@@ -54,9 +54,8 @@
             </div>
             <div class="col-md-4">
                 <div class="row">
-                    {foreach from=$issues item="issue"}
-                        {include file="frontend/objects/issue_summary.tpl"}
-                    {/foreach}
+                    {assign var="issue" value=$latestIssue}
+                    {include file="frontend/objects/issue_summary.tpl"}
                 </div>
             </div>
         </div>
