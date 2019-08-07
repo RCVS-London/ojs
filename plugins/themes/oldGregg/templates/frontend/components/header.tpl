@@ -37,8 +37,12 @@
                  {if $displayPageHeaderLogo.altText != ''}alt="{$displayPageHeaderLogo.altText|escape}"
                  {else}alt="{translate key="common.pageHeaderLogo.altText"}"{/if} />
         </a>
-        <div style="clear: both"></div>
+{*        <span>*}
+{*            brought to you by:<br>*}
+{*            RCVS Knowledge*}
+{*        </span>*}
     </div>
+
     {* user menu *}
     <nav class="site-navbar-wraper navbar navbar-expand-lg navbar-dark bg-dark">
         <button class="navbar-toggler mr-auto" type="button" data-toggle="collapse" data-target="#navbarNav"

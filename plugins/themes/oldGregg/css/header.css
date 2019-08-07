@@ -23,9 +23,7 @@ div.site-name {
 
 /* user menu */
 .site-navbar-wraper {
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-family: Play, "Noto Sans", serif;
+    padding: 0;
 }
 
 #navigationUser {
@@ -111,12 +109,16 @@ a.dropdown-item:active {
 
 .journal-logo {
     position: relative;
-    height: 100px;
+    height: 75px;
 }
 .journal-logo a {
     margin-right: 0;
     position: absolute;
     z-index: 1;
+}
+
+.journal-logo img {
+    width: 260px;
 }
 
 @media (max-width: 992px) {

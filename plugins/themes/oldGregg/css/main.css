@@ -12,7 +12,6 @@
 .registration-info-title {
     margin-bottom: 20px;
     margin-top: 20px;
-    font-family: Play, "Noto Sans", serif;
     font-size: 19px;
 }
 .reviewer legend {
@@ -56,3 +55,11 @@ body, input.defaultButton {
 body, input.defaultButton {
     color: #009999;
 }
+
+
+/* article */
+
+article header      { font-size: 13px; color: #666; }
+article h3          { margin: 5px 0 0; padding: 0; font-weight: 500; line-height: 1.2; font-size: 18px; }
+article h3 img      { float: right; margin-left: 10px; }
+article ul 	        { margin: 0; padding: 0; list-style-type: none; }

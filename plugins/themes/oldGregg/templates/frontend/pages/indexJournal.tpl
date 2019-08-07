@@ -17,67 +17,47 @@
             {/if}
             <div class="col-md-8">
                 <div class="row">
-                    {if $showSummary && $journalDescription}
-                        <div class="journal-summary-title col-md-12">
-                            <h3>{translate key="plugins.gregg.journal.summary"}</h3>
-                        </div>
-                        <div class="summary-content">
-                            {$journalDescription|strip_unsafe_html}
-                        </div>
-                    {/if}
-                    <div class="recent-articles-section-title col-md-12">
-                        <h3>{translate key="plugins.gregg.latest"}</h3>
-                    </div>
                     {foreach from=$publishedArticles item=article key=k}
                         <div class="recent-wrapper col-md-6">
-                            <div class="card">
-                                <a href="{url page="article" op="view" path=$article->getBestArticleId()}">
-                                    <img class="card-img-top" src="{$article->getLocalizedCoverImageUrl()|escape}">
-                                </a>
-                                <div class="card-body">
-                                    <h4 class="card-title">
-                                        <a class="recent-article-title"
-                                           href="{url page="article" op="view" path=$article->getBestArticleId()}">
-                                            {$article->getLocalizedTitle()|escape}
-                                        </a>
-                                    </h4>
-                                    <p class="card-text">
-                                        {foreach from=$article->getAuthors() key=k item=author}
-                                            <span>{$author->getLocalizedFamilyName()|escape}
-                                                {if $k<($article->getAuthors()|@count - 1)}
-                                                    {$author->getLocalizedGivenName()|regex_replace:"/(?<=\w)\w+/":".,"|escape}
-                                                {else}
-                                                    {$author->getLocalizedGivenName()|regex_replace:"/(?<=\w)\w+/":"."|escape}
-                                                {/if}</span>
-                                        {/foreach}
-                                    </p>
-                                </div>
-                                <div class="card-footer">
-                                    <small class="text-muted">
-                                        {$article->getSectionTitle()|escape}
-                                        |
-                                        {$article->getDatePublished()|date_format:"%Y-%m-%d"}
-                                    </small>
-                                </div>
-                            </div>
+                            <article>
+                                <header>
+                                    {$article->getSectionTitle()|escape} |
+                                    <time datetime="{$article->getDatePublished()|date_format:"%Y-%m-%d"}">
+                                        {$article->getDatePublished()|date_format:"%d %B %Y"}
+                                    </time>
+                                </header>
+                                <h3 class="mb10 extra-tight-line-height word-wrap" itemprop="name headline">
+                                    <a href="{url page="article" op="view" path=$article->getBestArticleId()}">
+                                        <img src="{$article->getLocalizedCoverImageUrl()|escape}" alt="" height="100" width="100">
+                                        {$article->getLocalizedTitle()|escape}
+                                    </a>
+                                    <div style="clear: both"></div>
+                                </h3>
+
+                                <ul>
+                                    {foreach from=$article->getAuthors() key=k item=author}
+                                        <span>
+                                            {$author->getLocalizedFamilyName()|escape}
+                                            {if $k<($article->getAuthors()|@count - 1)}
+                                                {$author->getLocalizedGivenName()|regex_replace:"/(?<=\w)\w+/":".,"|escape}
+                                            {else}
+                                                {$author->getLocalizedGivenName()|regex_replace:"/(?<=\w)\w+/":"."|escape}
+                                            {/if}
+                                        </span>
+                                    {/foreach}
+                                </ul>
+                            </article>
+
                         </div>
                     {/foreach}
                 </div>
-                {call_hook name="Templates::Index::journal"}
             </div>
             <div class="col-md-4">
-                {if empty($isFullWidth)}
-                    {capture assign="sidebarCode"}{call_hook name="Templates::Common::Sidebar"}{/capture}
-                    {if $sidebarCode}
-                        {if $latestIssues}
-                            {include file="frontend/objects/issue_slider.tpl"}
-                        {/if}
-                        <div class="pkp_structure_sidebar" role="complementary"
-                             aria-label="{translate|escape key="common.navigation.sidebar"}">
-                            {$sidebarCode}
-                        </div>
-                    {/if}
-                {/if}
+                <div class="row">
+                    {foreach from=$issues item="issue"}
+                        {include file="frontend/objects/issue_summary.tpl"}
+                    {/foreach}
+                </div>
             </div>
         </div>
     </div>
