@@ -60,23 +60,23 @@
 
         </div>
     </nav>
-    {if $requestedPage|escape != "article"}
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3 mt-3">
-                    <form class="input-group" action="{url page="search" op="search"}" method="post" role="search">
-                        {csrf}
-                        <input type="text" name="query" value="{$searchQuery|escape}" class="search-input-tag form-control"
-                               placeholder="{translate key="plugins.gregg.search-text"}" aria-label="Search">
-                        <span class="input-group-btn">
-                            <button class="btn btn-secondary"
-                                    type="submit">{translate key="plugins.gregg.search"}</button>
-                        </span>
-                    </form>
-                </div>
-            </div>
-        </div>
-    {/if}
+{*    {if $requestedPage|escape != "article"}*}
+{*        <div class="container-fluid">*}
+{*            <div class="row">*}
+{*                <div class="col-lg-6 offset-lg-3 mt-3">*}
+{*                    <form class="input-group" action="{url page="search" op="search"}" method="post" role="search">*}
+{*                        {csrf}*}
+{*                        <input type="text" name="query" value="{$searchQuery|escape}" class="search-input-tag form-control"*}
+{*                               placeholder="{translate key="plugins.gregg.search-text"}" aria-label="Search">*}
+{*                        <span class="input-group-btn">*}
+{*                            <button class="btn btn-secondary"*}
+{*                                    type="submit">{translate key="plugins.gregg.search"}</button>*}
+{*                        </span>*}
+{*                    </form>*}
+{*                </div>*}
+{*            </div>*}
+{*        </div>*}
+{*    {/if}*}
 </header>
 
 {* wraper for the page content; end in the footer; we want full-width container on the article's full-text page *}

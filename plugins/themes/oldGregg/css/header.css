@@ -69,6 +69,8 @@ a.dropdown-item:active {
 }
 .site-navbar-wraper #navigationPrimary .nav-link, .pkp_page_article .site-navbar-wraper > a {
     color: white;
+    text-decoration: none;
+    font-weight: bold;
 }
 
 .navbar-nav-scroll {

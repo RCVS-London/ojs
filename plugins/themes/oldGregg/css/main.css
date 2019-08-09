@@ -1,6 +1,19 @@
+body {
+    color: #666;
+    font-size: 13px;
+}
+a, a:link, a:active, a:visited, a:hover, input.defaultButton {
+    color: #069;
+    text-decoration: underline;
+}
+
+body, input.defaultButton {
+    color: #222;
+}
+
 .site-content {
     margin-top: 20px;
-    margin-bottom: 100px;
+    margin-bottom: 20px;
 }
 
 /* submission */
@@ -46,20 +59,7 @@ h4 {
 table.listing tr.fastTracked {
     background-color: #cccccc;
 }
-a, a:link, a:active, a:visited, a:hover, input.defaultButton {
-    color: #4b9590;
-}
+
 body, input.defaultButton {
     background-color: #ffffff;
 }
-body, input.defaultButton {
-    color: #009999;
-}
-
-
-/* article */
-
-article header      { font-size: 13px; color: #666; }
-article h3          { margin: 5px 0 0; padding: 0; font-weight: 500; line-height: 1.2; font-size: 18px; }
-article h3 img      { float: right; margin-left: 10px; }
-article ul 	        { margin: 0; padding: 0; list-style-type: none; }

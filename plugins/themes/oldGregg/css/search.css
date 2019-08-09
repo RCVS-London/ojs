@@ -1,0 +1,44 @@
+.form-control.search {
+    height: 60px;
+    border: 0;
+}
+.form-control.search * {
+    float: left;
+    height: 100%;
+    border: 0;
+    font-size: 20px;
+}
+.form-control.search select {
+    width: 25%;
+    color: #666;
+    /*background: #fff;*/
+    /*border-radius: 5px 0 0 5px;*/
+    padding: 0 0 0 5px;
+    border-bottom: 3px solid #ccc;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    background-image: url("../images/dropdown.svg");
+    background-position: calc(100% - 15px) center;
+    background-repeat: no-repeat;
+}
+.form-control.search select.selected {
+    color: #000;
+}
+.form-control.search input[type=text] {
+    width: 69%;
+    background: #fff;
+    padding: 0 10px;
+    border-bottom: 3px solid #ccc;
+}
+.form-control.search input[type=submit] {
+    width: 6%;
+    background: #82235f;
+    color: #ffffff;
+    /*border-radius: 0 5px 5px 0;*/
+    background-image: url("../images/search-solid.svg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 30%;
+}

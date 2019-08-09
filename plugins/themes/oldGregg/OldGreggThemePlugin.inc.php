@@ -60,9 +60,11 @@ class OldGreggThemePlugin extends ThemePlugin
 		$this->addStyle('site-wide', 'css/main.css');
 		$this->addStyle('index', 'css/index.css');
 		$this->addStyle('article', 'css/article.less');
+		$this->addStyle('card', 'css/card.css');
 		$this->addStyle('contact', 'css/contact.css');
 		$this->addStyle('announcements', 'css/announcements.css');
 		$this->addStyle('jats', 'css/jats.min.css');
+		$this->addStyle('search', 'css/search.css');
 
 		$this->addScript('jquery', 'jquery/jquery.min.js');
 		$this->addScript('popper', 'bootstrap/js/popper.min.js');
