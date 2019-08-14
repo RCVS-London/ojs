@@ -157,3 +157,9 @@ a.recent-article-title:hover {
     padding: 10px 10px 20px 10px;
     text-align: justify;
 }
+
+.submission {
+    padding: 0 15px;
+    /*border: 3px solid #82235f;*/
+    /*border-radius: 3px;*/
+}
