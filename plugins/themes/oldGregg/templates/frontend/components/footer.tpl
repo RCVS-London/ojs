@@ -8,7 +8,7 @@
     <footer class="site-footer">
         <div class="container">
             <div class="row">
-                <div class="col-md-5">
+                <div class="col-md-6">
                     <div class="col span_1_of_3first">
                         <div style="width: auto; margin-left: 0px; padding: 5px; border: 5px solid #335d5a; background-color: #5cb8b2; text-align:center; font-weight: bold; font-size:18pt">ISSN: 2396-9776</div>
                         <p>© {'Y'|date} RCVS Knowledge<br>© Authors retain the copyright of their article and retain publishing rights.<a href="https://veterinaryevidence.org/index.php/ve/about/submissions#onlineSubmissions"> Find out more</a></p>
@@ -21,7 +21,7 @@
                         <a href="{$baseUrl}/index.php/ve/gateway/plugin/WebFeedGatewayPlugin/atom" target="_blank"><img class="img-sm" src="{$baseUrl}/public/site/images/general/footer/rssVE.png" alt="RSS" /></a>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-6">
                     <div id="sidebar-phones">
                         <div class="block" >
                             <ul>
@@ -46,25 +46,6 @@
                             </ul>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-5">
-                    <h4>The Veterinary Evidence Handbook For Writing Knowledge Summaries</h4>
-                    <p>
-                        <a href="{$baseUrl}/rcvskmod/ourdocuments/The_Veterinary_Evidence_Handbook_For_Writing_Knowledge_Summaries.pdf" target="_blank">
-                            <img
-                                style="margin: 0px 20px 20px 0px;"
-                                src="{$baseUrl}/public/site/images/general/footer/handbook-footer.png"
-                                width="79"
-                                height="110"
-                                align="left"
-                            />
-                        </a>
-                        For guidance to authors researching and writing knowledge summaries. The <strong>
-                        <a href="{$baseUrl}/rcvskmod/ourdocuments/The_Veterinary_Evidence_Handbook_For_Writing_Knowledge_Summaries.pdf" target="_blank">
-                            Veterinary Evidence Handbook For Writing Knowledge Summaries
-                        </a></strong> is a living document that is updated regularly with feedback from users, reflecting
-                        advances in methodology and the application of evidence-based practice.
-                    </p>
                 </div>
             </div>
         </div>
