@@ -24,6 +24,7 @@
                 </div>
             {/if}
             <div class="col-md-12">
+                <h3>Latest Articles</h3>
                 <div class="row">
                     {foreach from=$publishedArticles item=article key=k}
                             <div class="col-md-6" style="margin-bottom: 30px;">
@@ -36,24 +37,31 @@
 
         <hr />
 
-        <div class="search-block d-none d-sm-block">
-            <form class="input-group" action="{url page="search" op="search"}" method="post" role="search">
-                {csrf}
-                <div class="form-control search">
-                    <select onchange="this.classList.add('selected')">
-                        <option>All Categories</option>
-                        <option>Dogs</option>
-                        <option>Cats</option>
-                        <option>Birds</option>
-                    </select>
-                    <input type="text" name="query" value="{$searchQuery|escape}" placeholder="Search Veterinary Evidence" />
-                    <input type="submit" value="" />
-                    <div style="clear: both"></div>
+        <div class="row">
+            {if $homepageImage}
+                <div class="homepage-image-wrapper col-md-12">
+                    <img class="img-fluid homepage_image" src="{$publicFilesDir}/{$homepageImage.uploadName|escape}" alt="{$homepageImageAltText|escape}">
                 </div>
-            </form>
-
-            <hr />
+            {/if}
+            <div class="col-md-12">
+                <h3>Most Read Articles</h3>
+                <div class="row">
+                    {foreach from=$mostRead item=article key=k}
+                        <div class="col-md-6" style="margin-bottom: 30px;">
+                            {include file="frontend/objects/article_card_horizontal.tpl"}
+                        </div>
+                    {/foreach}
+                </div>
+            </div>
         </div>
+
+        <hr />
+
+        <div class="search-block d-none d-sm-block">
+            {include file="frontend/objects/search.tpl"}
+        </div>
+
+        <hr />
 
         <div class="row">
             <div class="col-md-6">

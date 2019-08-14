@@ -111,13 +111,15 @@ class OldGreggThemePlugin extends ThemePlugin
 
 		$this->addMenuArea(array('primary', 'user'));
 
-		HookRegistry::register('TemplateManager::display',array(&$this, 'xmlDownload'));
-		HookRegistry::register('TemplateManager::display',array(&$this, 'htmlDisplay'));
-		HookRegistry::register('TemplateManager::display', array($this, 'browseLatest'), HOOK_SEQUENCE_CORE);
-		HookRegistry::register('TemplateManager::display', array($this, 'latestIssuesSlider'), HOOK_SEQUENCE_NORMAL);
-		HookRegistry::register('TemplateManager::display', array($this, 'journalDescription'), HOOK_SEQUENCE_NORMAL);
-
-		HookRegistry::register('TemplateManager::display',array($this, 'getLatestIssue'));
+		HookRegistry::register('TemplateManager::display', [&$this, 'xmlDownload']);
+		HookRegistry::register('TemplateManager::display', [&$this, 'htmlDisplay']);
+		HookRegistry::register('TemplateManager::display', [$this, 'browseLatest'], HOOK_SEQUENCE_CORE);
+		HookRegistry::register('TemplateManager::display', [$this, 'latestIssuesSlider'], HOOK_SEQUENCE_NORMAL);
+		HookRegistry::register('TemplateManager::display', [$this, 'journalDescription'], HOOK_SEQUENCE_NORMAL);
+		HookRegistry::register('TemplateManager::display', [$this, 'mostRead']);
+		HookRegistry::register('TemplateManager::display', [$this, 'getLatestIssue']);
+		HookRegistry::register('TemplateManager::display', [$this, 'getCategories']);
+		HookRegistry::register('SubmissionSearch::retrieveResults', [$this, 'customSearch']);
 	}
 
 
@@ -386,13 +388,7 @@ class OldGreggThemePlugin extends ThemePlugin
 		$template = $args[1];
 		if ($template != 'frontend/pages/indexJournal.tpl') return false;
 		/* get number of latest article to display from user input; if there was none - use default */
-		$latestArticles = $this->getOption("latestArticlesNumber");
-		if (is_null($latestArticles)) {
-			$latestArticles = OLDGREGG_LATEST_ARTICLES_DEFAULT;
-		} else {
-			$latestArticles = intval($latestArticles);
-		}
-		$rangeArticles = new DBResultRange($latestArticles, 1);
+		$rangeArticles = new DBResultRange($this->getThemeLatestArticleCount(), 1);
 		$publishedArticleDao = DAORegistry::getDAO('PublishedArticleDAO');
 		/* retrieve current journal id from the request */
 		$request = $this->getRequest();
@@ -405,6 +401,35 @@ class OldGreggThemePlugin extends ThemePlugin
 			$publishedArticles[] = $publishedArticle;
 		}
 		$smarty->assign('publishedArticles', $publishedArticles);
+	}
+
+	public function mostRead($hookName, $args) {
+		$smarty = $args[0];
+
+		$metricsDao = DAORegistry::getDAO('MetricsDAO');
+		$publishedArticleDao = DAORegistry::getDAO('PublishedArticleDAO');
+
+		$currentDate = date('Ymd');
+		$sixMonthsAgo = date('Ymd', strtotime("-6 month"));
+
+		$result = $metricsDao->retrieve("
+			SELECT submission_id, SUM(metric) AS metric
+			FROM metrics 
+			WHERE (day BETWEEN $sixMonthsAgo AND $currentDate) AND
+			(assoc_type='515' AND submission_id IS NOT NULL)
+			GROUP BY submission_id
+			ORDER BY metric DESC LIMIT {$this->getThemeLatestArticleCount()}
+		");
+
+		$articles = [];
+
+		while (!$result->EOF) {
+			$resultRow = $result->GetRowAssoc(false);
+			$articles[] = $publishedArticleDao->getById($resultRow['submission_id']);
+			$result->MoveNext();
+		}
+
+		$smarty->assign('mostRead', $articles);
 	}
 
 	public function latestIssuesSlider($hookName, $args) {
@@ -467,6 +492,47 @@ class OldGreggThemePlugin extends ThemePlugin
 		$latestIssuesObjects = $issueDao->getPublishedIssues($journalId, $rangeIssues);
 
 		$smarty->assign('latestIssue', $latestIssuesObjects->next());
+	}
+
+	public function getCategories($hookName, $args) {
+		$smarty = $args[0];
+
+		$request = $this->getRequest();
+		$journal = $request->getJournal();
+		$journalId = $journal->getId();
+
+		$categoryDAO = DAORegistry::getDAO('CategoryDAO');
+		$categoryResult = $categoryDAO->getByContextId($journalId);
+ 		$categories = [];
+
+ 		while ($category = $categoryResult->next()) {
+			$categories[] = $category;
+		}
+
+		$smarty->assign('categories', $categories);
+	}
+
+	public function customSearch($hookName, $args) {
+		$request = $this->getRequest();
+		$categoryId = $request->getUserVar('category_id');
+
+		var_dump($request);
+		var_dump($hookName);
+		var_dump($args);
+	}
+
+	/**
+	 * @return int
+	 */
+	private function getThemeLatestArticleCount() {
+		$latestArticleCount = $this->getOption("latestArticlesNumber");
+		if (is_null($latestArticleCount)) {
+			$latestArticleCount = OLDGREGG_LATEST_ARTICLES_DEFAULT;
+		} else {
+			$latestArticleCount = intval($latestArticleCount);
+		}
+
+		return $latestArticleCount;
 	}
 
 }
