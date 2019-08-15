@@ -79,5 +79,9 @@
 {*    {/if}*}
 </header>
 
+
+{*{$dropContainer|default:false}*}
+{if !$dropContainer}
 {* wraper for the page content; end in the footer; we want full-width container on the article's full-text page *}
 <div class="site-content container{if $requestedPage|escape == "article"}-fluid{/if}">
+{/if}
