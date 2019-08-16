@@ -63,3 +63,27 @@ table.listing tr.fastTracked {
 body, input.defaultButton {
     background-color: #ffffff;
 }
+
+.card {
+    border: 0;
+}
+
+.article-cover-image {
+    border: 0;
+}
+
+.galleys_links {
+    list-style-type: none;
+    border: 0;
+    padding: 0;
+}
+
+.galleys_links li {
+    border: 0;
+    display: inline-block;
+}
+
+.galleys_links li a {
+    border: 0;
+    padding: 0;
+}

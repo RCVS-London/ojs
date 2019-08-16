@@ -52,7 +52,11 @@
 		</span>
     {/if}
 
-    <i class="fas fa-file-download fa-2x"></i>
+    {if $type=="pdf"}
+        <img width="64" src="/plugins/themes/oldGregg/images/pdf.svg" />
+    {else}
+        <img width="64" src="/plugins/themes/oldGregg/images/html.svg" />
+    {/if}
 
     {if $restricted && $purchaseFee && $purchaseCurrency}
         <span class="purchase_cost">

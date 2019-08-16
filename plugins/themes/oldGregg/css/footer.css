@@ -1,8 +1,25 @@
 footer {
-    margin-top: 50px;
+    margin-top: 75px;
     padding-top: 40px;
-    background-color: #363636;
+    color: #000;
+    background: #efefef;
+}
+
+footer ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+footer #issn {
     color: #fff;
+    margin-bottom: 10px;
+    padding: 5px;
+    border: 5px solid #ad3882;
+    background-color: #82235f;
+    text-align:center;
+    font-weight: bold;
+    font-size:18pt
 }
 
 footer .container {
@@ -11,7 +28,6 @@ footer .container {
 
 footer a {
     color: white;
-    margin-right: 5%;
 }
 
 .site-content {
@@ -19,7 +35,7 @@ footer a {
 }
 
 footer .council-acknowledgement {
-    background: #5cb8b2;
+    background: #82235f;
     text-align: center;
     padding: 0.5% 10% 1.5%;
     color: #fff;

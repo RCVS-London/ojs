@@ -28,7 +28,7 @@
         {/if}
         <p>
             <small class="issue-article-number text-muted">
-                {$article->getPages()|escape}
+                {$article->getViews()|escape} views
             </small>
             <small class="issue-article-number text-muted">
                 |
@@ -37,6 +37,25 @@
                 {translate key="plugins.gregg.published"}: {$article->getDatePublished()|date_format:$dateFormatShort}
             </small>
         </p>
+        {if !$hideGalleys}
+            <ul class="galleys_links">
+                {foreach from=$article->getGalleys() item=galley}
+                    {if $primaryGenreIds}
+                        {assign var="file" value=$galley->getFile()}
+                        {if !$galley->getRemoteUrl() && !($file && in_array($file->getGenreId(), $primaryGenreIds))}
+                            {continue}
+                        {/if}
+                    {/if}
+                    <li>
+                        {assign var="hasArticleAccess" value=$hasAccess}
+                        {if $currentContext->getSetting('publishingMode') == $smarty.const.PUBLISHING_MODE_OPEN || $article->getAccessStatus() == $smarty.const.ARTICLE_ACCESS_OPEN}
+                            {assign var="hasArticleAccess" value=1}
+                        {/if}
+                        {include file="frontend/objects/galley_link.tpl" parent=$article hasAccess=$hasArticleAccess purchaseFee=$currentJournal->getSetting('purchaseArticleFee') purchaseCurrency=$currentJournal->getSetting('currency')}
+                    </li>
+                {/foreach}
+            </ul>
+        {/if}
     </div>
 {/capture}
 
