@@ -38,8 +38,8 @@
 {/if}
 
 {* Don't be frightened. This is just a link *}
-<a class="galley-link {if $isSupplementary}obj_galley_link_supplementary{else}obj_galley_link{/if} {$type}{if $restricted} restricted{/if}"
-   href="{url page=$page op="view" path=$parentId|to_array:$galley->getBestGalleyId()}">
+<a target="_blank" class="galley-link {if $isSupplementary}obj_galley_link_supplementary{else}obj_galley_link{/if} {$type}{if $restricted} restricted{/if}"
+   href="{url page=$page op="download" path=$parentId|to_array:$galley->getBestGalleyId() params=['inline' => 1] }">
 
     {* Add some screen reader text to indicate if a galley is restricted *}
     {if $restricted}
