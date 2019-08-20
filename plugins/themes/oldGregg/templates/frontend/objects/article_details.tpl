@@ -256,6 +256,7 @@
 		<div class="articleView-data row">
 			<div class="left-article-block col-xl-3">
 				{if $generatePdfUrl || $primaryGalleys}
+					<h2>Article Links</h2>
 					<div class="galley-link-wrapper">
 						{if $generatePdfUrl}
 							<a class="galley-link" href="{$generatePdfUrl}">
@@ -264,9 +265,13 @@
 						{/if}
 
 						{if $primaryGalleys}
-							{foreach from=$primaryGalleys item=galley}
-									{include file="frontend/objects/galley_link.tpl" parent=$article galley=$galley purchaseFee=$currentJournal->getSetting('purchaseArticleFee') purchaseCurrency=$currentJournal->getSetting('currency')}
-							{/foreach}
+							<ul id="article-galley">
+								{foreach from=$primaryGalleys item=galley}
+									<li>
+										{include file="frontend/objects/galley_link.tpl" parent=$article galley=$galley purchaseFee=$currentJournal->getSetting('purchaseArticleFee') purchaseCurrency=$currentJournal->getSetting('currency')}
+									</li>
+								{/foreach}
+							</ul>
 						{/if}
 					</div>
 				{/if}
@@ -296,130 +301,132 @@
 		</div>
 	</div>
 
-	{* How to cite *}
-	{if $citation}
-		<div class="item citation">
-			<div class="sub_item citation_display">
-				<div class="label">
-					{translate key="submission.howToCite"}
-				</div>
-				<div class="value">
-					<div id="citationOutput" role="region" aria-live="polite">
-						{$citation}
+	<footer>
+		{* How to cite *}
+		{if $citation}
+			<div class="item citation">
+				<div class="sub_item citation_display">
+					<div class="label">
+						{translate key="submission.howToCite"}
 					</div>
-					<div class="citation_formats">
-						<button class="cmp_button citation_formats_button" aria-controls="cslCitationFormats" aria-expanded="false" data-csl-dropdown="true">
-							{translate key="submission.howToCite.citationFormats"}
-						</button>
-						<div id="cslCitationFormats" class="citation_formats_list" aria-hidden="true">
-							<ul class="citation_formats_styles">
-								{foreach from=$citationStyles item="citationStyle"}
-									<li>
-										<a
-											aria-controls="citationOutput"
-											href="{url page="citationstylelanguage" op="get" path=$citationStyle.id params=$citationArgs}"
-											data-load-citation
-											data-json-href="{url page="citationstylelanguage" op="get" path=$citationStyle.id params=$citationArgsJson}"
-										>
-											{$citationStyle.title|escape}
-										</a>
-									</li>
-								{/foreach}
-							</ul>
-							{if count($citationDownloads)}
-								<div class="label">
-									{translate key="submission.howToCite.downloadCitation"}
-								</div>
+					<div class="value">
+						<div id="citationOutput" role="region" aria-live="polite">
+							{$citation}
+						</div>
+						<div class="citation_formats">
+							<button class="cmp_button citation_formats_button" aria-controls="cslCitationFormats" aria-expanded="false" data-csl-dropdown="true">
+								{translate key="submission.howToCite.citationFormats"}
+							</button>
+							<div id="cslCitationFormats" class="citation_formats_list" aria-hidden="true">
 								<ul class="citation_formats_styles">
-									{foreach from=$citationDownloads item="citationDownload"}
+									{foreach from=$citationStyles item="citationStyle"}
 										<li>
-											<a href="{url page="citationstylelanguage" op="download" path=$citationDownload.id params=$citationArgs}">
-												<span class="fa fa-download"></span>
-												{$citationDownload.title|escape}
+											<a
+												aria-controls="citationOutput"
+												href="{url page="citationstylelanguage" op="get" path=$citationStyle.id params=$citationArgs}"
+												data-load-citation
+												data-json-href="{url page="citationstylelanguage" op="get" path=$citationStyle.id params=$citationArgsJson}"
+											>
+												{$citationStyle.title|escape}
 											</a>
 										</li>
 									{/foreach}
 								</ul>
-							{/if}
+								{if count($citationDownloads)}
+									<div class="label">
+										{translate key="submission.howToCite.downloadCitation"}
+									</div>
+									<ul class="citation_formats_styles">
+										{foreach from=$citationDownloads item="citationDownload"}
+											<li>
+												<a href="{url page="citationstylelanguage" op="download" path=$citationDownload.id params=$citationArgs}">
+													<span class="fa fa-download"></span>
+													{$citationDownload.title|escape}
+												</a>
+											</li>
+										{/foreach}
+									</ul>
+								{/if}
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	{/if}
+		{/if}
 
-	{* Issue article appears in *}
-	<div class="item issue">
-		<div class="sub_item">
-			<div class="label">
-				{translate key="issue.issue"}
-			</div>
-			<div class="value">
-				<a class="title" href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
-					{$issue->getIssueIdentification()}
-				</a>
-			</div>
-		</div>
-
-		{if $section}
+		{* Issue article appears in *}
+		<div class="item issue">
 			<div class="sub_item">
 				<div class="label">
-					{translate key="section.section"}
+					{translate key="issue.issue"}
 				</div>
 				<div class="value">
-					{$section->getLocalizedTitle()|escape}
-				</div>
-			</div>
-		{/if}
-	</div>
-
-	{* PubIds (requires plugins) *}
-	{foreach from=$pubIdPlugins item=pubIdPlugin}
-		{if $pubIdPlugin->getPubIdType() == 'doi'}
-			{continue}
-		{/if}
-		{assign var=pubId value=$article->getStoredPubId($pubIdPlugin->getPubIdType())}
-		{if $pubId}
-			<div class="item pubid">
-				<div class="label">
-					{$pubIdPlugin->getPubIdDisplayType()|escape}
-				</div>
-				<div class="value">
-					{if $pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
-						<a id="pub-id::{$pubIdPlugin->getPubIdType()|escape}" href="{$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}">
-							{$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
-						</a>
-					{else}
-						{$pubId|escape}
-					{/if}
-				</div>
-			</div>
-		{/if}
-	{/foreach}
-
-	{* Licensing info *}
-	{if $copyright || $licenseUrl}
-		<div class="item copyright">
-			{if $licenseUrl}
-				{if $ccLicenseBadge}
-					{if $copyrightHolder}
-						<p>{translate key="submission.copyrightStatement" copyrightHolder=$copyrightHolder copyrightYear=$copyrightYear}</p>
-					{/if}
-					{$ccLicenseBadge}
-				{else}
-					<a href="{$licenseUrl|escape}" class="copyright">
-						{if $copyrightHolder}
-							{translate key="submission.copyrightStatement" copyrightHolder=$copyrightHolder copyrightYear=$copyrightYear}
-						{else}
-							{translate key="submission.license"}
-						{/if}
+					<a class="title" href="{url page="issue" op="view" path=$issue->getBestIssueId()}">
+						{$issue->getIssueIdentification()}
 					</a>
-				{/if}
-			{/if}
-			{$copyright}
-		</div>
-	{/if}
+				</div>
+			</div>
 
-	{call_hook name="Templates::Article::Details"}
+			{if $section}
+				<div class="sub_item">
+					<div class="label">
+						{translate key="section.section"}
+					</div>
+					<div class="value">
+						{$section->getLocalizedTitle()|escape}
+					</div>
+				</div>
+			{/if}
+		</div>
+
+		{* PubIds (requires plugins) *}
+		{foreach from=$pubIdPlugins item=pubIdPlugin}
+			{if $pubIdPlugin->getPubIdType() == 'doi'}
+				{continue}
+			{/if}
+			{assign var=pubId value=$article->getStoredPubId($pubIdPlugin->getPubIdType())}
+			{if $pubId}
+				<div class="item pubid">
+					<div class="label">
+						{$pubIdPlugin->getPubIdDisplayType()|escape}
+					</div>
+					<div class="value">
+						{if $pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
+							<a id="pub-id::{$pubIdPlugin->getPubIdType()|escape}" href="{$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}">
+								{$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
+							</a>
+						{else}
+							{$pubId|escape}
+						{/if}
+					</div>
+				</div>
+			{/if}
+		{/foreach}
+
+		{* Licensing info *}
+		{if $copyright || $licenseUrl}
+			<div class="item copyright">
+				{if $licenseUrl}
+					{if $ccLicenseBadge}
+						{if $copyrightHolder}
+							<p>{translate key="submission.copyrightStatement" copyrightHolder=$copyrightHolder copyrightYear=$copyrightYear}</p>
+						{/if}
+						{$ccLicenseBadge}
+					{else}
+						<a href="{$licenseUrl|escape}" class="copyright">
+							{if $copyrightHolder}
+								{translate key="submission.copyrightStatement" copyrightHolder=$copyrightHolder copyrightYear=$copyrightYear}
+							{else}
+								{translate key="submission.license"}
+							{/if}
+						</a>
+					{/if}
+				{/if}
+				{$copyright}
+			</div>
+		{/if}
+
+		{call_hook name="Templates::Article::Details"}
+	</footer>
 
 </article>

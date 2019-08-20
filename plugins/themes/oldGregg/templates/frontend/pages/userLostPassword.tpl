@@ -29,16 +29,16 @@
             </div>
             {if !$disableUserReg}
                 <div class="btn-group" role="group">
-                    <button class="btn btn-secondary" type="submit">
+                    <button class="bttn" type="submit">
                         {translate key="user.login.resetPassword"}
                     </button>
                     {capture assign="registerUrl"}{url page="user" op="register" source=$source}{/capture}
-                    <a class="btn btn-secondary" type="button" href="{$registerUrl}" class="register">
+                    <a class="bttn" type="button" href="{$registerUrl}" class="register">
                         {translate key="user.login.registerNewAccount"}
                     </a>
                 </div>
             {else}
-                <button class="btn btn-secondary" type="submit">
+                <button class="bttn" type="submit">
                     {translate key="user.login.resetPassword"}
                 </button>
             {/if}

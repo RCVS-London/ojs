@@ -34,6 +34,44 @@
             <hr />
 
             <div class="row">
+                <div class="col-md-6">
+                    <div class="submission">
+                        <h2>Publish with Veterinary Evidence</h2>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div style="max-width: 230px; text-align: center; margin-bottom: 25px;">
+                                    <img style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);" src="/plugins/themes/oldGregg/images/submission.png" />
+                                </div>
+                            </div>
+                            <div class="col-md-6" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                                <a class="bttn" style="width: 230px" href="{url page="about" path="submissions"}">Submission instructions</a>
+                                <br />
+                                <a class="bttn" style="width: 230px" href="{url page="submission" op="wizard"}">Make a Submission</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h2>Clinical Queries</h2>
+                    <ul style="list-style-type: none;">
+                        <li><a href="{url page="production-animal"}">Production Animal</a></li>
+                        <li><a href="{url page="equine"}">Enquine</a></li>
+                        <li><a href="{url page="canine"}">Canine</a></li>
+                        <li><a href="{url page="feline"}">Feline</a></li>
+                        <li><a href="{url page="general}"}">General</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="search-block d-none d-sm-block">
+                {include file="frontend/objects/search.tpl"}
+            </div>
+
+            <hr />
+
+            <div class="row">
                 <div class="col-md-12">
                     <h3>Most Read Articles</h3>
                     <div class="row">
@@ -57,49 +95,6 @@
 
                 <hr />
             {/if}
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="submission">
-                        <h2>Publish with Veterinary Evidence</h2>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div style="max-width: 230px; text-align: center; margin-bottom: 25px;">
-                                    <img style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);" src="/plugins/themes/oldGregg/images/submission.png" />
-                                </div>
-                            </div>
-                            <div class="col-md-6" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
-                                <a class="bttn" style="width: 230px" href="{url page="about" path="submissions"}">Submission instructions</a>
-                                <br />
-                                <a class="bttn" style="width: 230px" href="{url page="submission" op="wizard"}">Make a Submission</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <h2>Announcements</h2>
-                    <ul style="list-style-type: none;">
-                        {foreach from=$announcements item=announcement key=k}
-                            <li>
-                                <div class="card horizontal" style="border: 0;">
-                                    <h3 class="mb10 extra-tight-line-height word-wrap" itemprop="name headline">
-                                        {$announcement->getLocalizedTitle()}
-                                    </h3>
-                                    <div class="card-body">
-                                        {$announcement->getLocalizedDescriptionShort()}
-                                    </div>
-                                </div>
-                            </li>
-                        {/foreach}
-                    </ul>
-                </div>
-            </div>
-
-            <hr />
-
-            <div class="search-block d-none d-sm-block">
-                {include file="frontend/objects/search.tpl"}
-            </div>
 
             <hr />
 

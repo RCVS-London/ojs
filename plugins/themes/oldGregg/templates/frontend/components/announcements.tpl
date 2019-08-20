@@ -19,7 +19,7 @@
         <div class="card-body">
             <div class="summary">
                 {$announcement->getLocalizedDescriptionShort()|strip_unsafe_html}
-                <a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="btn btn-secondary">
+                <a href="{url router=$smarty.const.ROUTE_PAGE page="announcement" op="view" path=$announcement->getId()}" class="bttn">
                     <span aria-hidden="true" role="presentation">
                         {translate key="common.readMore"}
                     </span>

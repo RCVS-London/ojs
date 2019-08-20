@@ -120,7 +120,6 @@ class OldGreggThemePlugin extends ThemePlugin
 		HookRegistry::register('TemplateManager::display', [$this, 'mostRead']);
 		HookRegistry::register('TemplateManager::display', [$this, 'getLatestIssue']);
 		HookRegistry::register('TemplateManager::display', [$this, 'getCategories']);
-		HookRegistry::register('SubmissionSearch::retrieveResults', [$this, 'customSearch']);
 	}
 
 
@@ -513,15 +512,6 @@ class OldGreggThemePlugin extends ThemePlugin
 		$smarty->assign('categories', $categories);
 	}
 
-	public function customSearch($hookName, $args) {
-		$request = $this->getRequest();
-		$categoryId = $request->getUserVar('category_id');
-
-		var_dump($request);
-		var_dump($hookName);
-		var_dump($args);
-	}
-
 	/**
 	 * @return int
 	 */
@@ -535,7 +525,6 @@ class OldGreggThemePlugin extends ThemePlugin
 
 		return $latestArticleCount;
 	}
-
 }
 
 ?>

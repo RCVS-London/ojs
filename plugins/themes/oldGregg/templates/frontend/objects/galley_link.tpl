@@ -14,9 +14,8 @@
 {* Determine galley type and URL op *}
 {if $galley->isPdfGalley()}
     {assign var="type" value="pdf"}
-
 {else}
-    {assign var="type" value="file"}
+
 {/if}
 
 {* Get page and parentId for URL *}
@@ -38,7 +37,8 @@
 {/if}
 
 {* Don't be frightened. This is just a link *}
-<a target="_blank" class="galley-link {if $isSupplementary}obj_galley_link_supplementary{else}obj_galley_link{/if} {$type}{if $restricted} restricted{/if}"
+<span class="galley-icon-wrapper">
+<a target="_blank" style="padding: 25px;" class="galley-icon galley-link {if $isSupplementary}obj_galley_link_supplementary{else}obj_galley_link{/if} {$type}{if $restricted} restricted{/if}"
    href="{url page=$page op="download" path=$parentId|to_array:$galley->getBestGalleyId() params=['inline' => 1] }">
 
     {* Add some screen reader text to indicate if a galley is restricted *}
@@ -52,11 +52,7 @@
 		</span>
     {/if}
 
-    {if $type=="pdf"}
-        <img width="64" src="/plugins/themes/oldGregg/images/pdf.svg" />
-    {else}
-        <img width="64" src="/plugins/themes/oldGregg/images/html.svg" />
-    {/if}
+    {$galley->getLabel()}
 
     {if $restricted && $purchaseFee && $purchaseCurrency}
         <span class="purchase_cost">
@@ -64,3 +60,4 @@
 		</span>
     {/if}
 </a>
+</span>

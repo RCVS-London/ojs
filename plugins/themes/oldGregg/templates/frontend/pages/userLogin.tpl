@@ -40,10 +40,10 @@
                     {translate key="user.login.rememberUsernameAndPassword"}
                 </label>
             </div>
-            <button type="submit" class="btn btn-secondary">{translate key="user.login"}</button>
+            <button style="margin: 5px 15px 0 0;" type="submit" class="bttn">{translate key="user.login"}</button>
             {if !$disableUserReg}
                 {capture assign="registerUrl"}{url page="user" op="register" source=$source}{/capture}
-                <a href="{$registerUrl}" class="btn btn-secondary">
+                <a href="{$registerUrl}" class="bttn">
                     {translate key="user.login.registerNewAccount"}
                 </a>
             {/if}

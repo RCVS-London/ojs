@@ -27,15 +27,15 @@
             </p>
         {/if}
         <p>
-            <small class="issue-article-number text-muted">
+            <span class="issue-article-number text-muted">
                 {$article->getViews()|escape} views
-            </small>
-            <small class="issue-article-number text-muted">
+            </span>
+            <span class="issue-article-number text-muted">
                 |
-            </small>
-            <small class="issue-article-date text-muted">
+            </span>
+            <span class="issue-article-date text-muted">
                 {translate key="plugins.gregg.published"}: {$article->getDatePublished()|date_format:$dateFormatShort}
-            </small>
+            </span>
         </p>
         {if !$hideGalleys}
             <ul class="galleys_links">

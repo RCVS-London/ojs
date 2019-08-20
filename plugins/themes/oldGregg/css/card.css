@@ -54,3 +54,6 @@ article.card.horizontal ul {
     border-radius: 0;
 }
 
+.card-body {
+    padding: 0;
+}

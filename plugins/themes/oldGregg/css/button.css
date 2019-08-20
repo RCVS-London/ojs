@@ -1,27 +1,35 @@
+.card {
+    background-color: transparent;
+}
+
 a.bttn {
     color: #000;
     text-decoration: none;
     -webkit-transition: 0.3s all ease;
     transition: 0.3s ease all;
 }
-a.bttn:hover {
+.bttn:hover {
     color: #FFF;
 }
-a.bttn:focus {
+.bttn:focus {
     color: #FFF;
 }
 
-a.bttn-dark {
+.bttn-dark {
     color: #644cad;
     text-decoration: none;
     -webkit-transition: 0.3s all ease;
     transition: 0.3s ease all;
 }
-a.bttn-dark:hover {
+.bttn-dark:hover {
     color: #FFF;
 }
-a.bttn-dark:focus {
+.bttn-dark:focus {
     color: #FFF;
+}
+
+.bttn[type=submit] {
+    background: none;
 }
 
 .bttn {
@@ -106,3 +114,4 @@ a.bttn-dark:focus {
     right: 0;
     opacity: 1;
 }
+
