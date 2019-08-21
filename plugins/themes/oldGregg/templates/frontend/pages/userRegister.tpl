@@ -112,9 +112,9 @@
 			<div class="g-recaptcha" data-sitekey=""></div>
 
 			<div class="register-form-buttons btn-group" role="group">
-				<button type="submit" class="submit btn btn-secondary">{translate key="user.register"}</button>
+				<button style="margin-right: 15px;" type="submit" class="bttn">{translate key="user.register"}</button>
                 {capture assign="rolesProfileUrl"}{url page="user" op="profile" path="roles"}{/capture}
-				<a href="{url page="login" source=$rolesProfileUrl}" type="button" class="login btn btn-secondary">
+				<a href="{url page="login" source=$rolesProfileUrl}" class="bttn">
 					{translate key="user.login"}
 				</a>
 			</div>

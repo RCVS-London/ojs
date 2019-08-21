@@ -7,6 +7,7 @@ a.bttn {
     text-decoration: none;
     -webkit-transition: 0.3s all ease;
     transition: 0.3s ease all;
+    line-height: 1;
 }
 .bttn:hover {
     color: #FFF;
