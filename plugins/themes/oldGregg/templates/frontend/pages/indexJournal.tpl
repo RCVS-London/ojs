@@ -17,6 +17,10 @@
             </div>
         {/if}
 
+        {if $additionalHomeContent}
+            {$additionalHomeContent}
+        {/if}
+
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
@@ -39,7 +43,7 @@
                         <h2>Publish with Veterinary Evidence</h2>
                         <div class="row">
                             <div class="col-md-6">
-                                <div style="max-width: 230px; text-align: center; margin-bottom: 25px;">
+                                <div style="max-width: 230px; text-align: center; margin: 0 auto 25px;">
                                     <img style="box-shadow: 0 2px 10px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.1);" src="/plugins/themes/oldGregg/images/submission.png" />
                                 </div>
                             </div>
@@ -83,18 +87,6 @@
                     </div>
                 </div>
             </div>
-
-            <hr />
-
-            {if $additionalHomeContent}
-                <div class="row">
-                    <div class="col-md-12">
-                        {$additionalHomeContent}
-                    </div>
-                </div>
-
-                <hr />
-            {/if}
 
             <hr />
 

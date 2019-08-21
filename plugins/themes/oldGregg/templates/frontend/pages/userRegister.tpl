@@ -108,6 +108,9 @@
 				</fieldset>
             {/if}
 
+			<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+			<div class="g-recaptcha" data-sitekey=""></div>
+
 			<div class="register-form-buttons btn-group" role="group">
 				<button type="submit" class="submit btn btn-secondary">{translate key="user.register"}</button>
                 {capture assign="rolesProfileUrl"}{url page="user" op="profile" path="roles"}{/capture}

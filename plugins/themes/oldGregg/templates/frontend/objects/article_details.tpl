@@ -246,7 +246,9 @@
 					<div class="galley-keywords-row">
 						{foreach from=$keywords item=keywordArray}
 							{foreach from=$keywordArray item=keyword key=k}
-								<span class="galley-span-keyword">{$keyword|escape}</span>
+								<a href="{url page=search op=search params=['query' => {$keyword|escape}]}">
+									<span class="galley-span-keyword">{$keyword|escape}</span>
+								</a>
 							{/foreach}
 						{/foreach}
 					</div>
@@ -314,7 +316,7 @@
 							{$citation}
 						</div>
 						<div class="citation_formats">
-							<button class="cmp_button citation_formats_button" aria-controls="cslCitationFormats" aria-expanded="false" data-csl-dropdown="true">
+							<button style="margin: 5px 0; background: transparent;" class="bttn" aria-controls="cslCitationFormats" aria-expanded="false" data-csl-dropdown="true">
 								{translate key="submission.howToCite.citationFormats"}
 							</button>
 							<div id="cslCitationFormats" class="citation_formats_list" aria-hidden="true">

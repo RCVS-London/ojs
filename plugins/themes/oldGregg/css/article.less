@@ -1,3 +1,10 @@
+@import "../../../../lib/pkp/styles/fontawesome.less";
+@import "../../../../lib/pkp/styles/normalize.less";
+@import "../../../../lib/pkp/styles/variables.less";
+@import "../../../../lib/pkp/styles/utils.less";
+@import "../../../../lib/pkp/styles/helpers.less";
+@import "../../../../lib/pkp/styles/controllers/extrasOnDemand.less";
+
 /* breadcrumbs */
 ol.breadcrumb {
 	background-color: white;
@@ -151,4 +158,105 @@ caption .label {
 
 article footer {
 	background: transparent;
+	.item {
+		margin: 0 0 25px;
+		.sub_item {
+			margin: 0 0 10px;
+		}
+	}
+}
+
+.citation_display {
+
+	.value {
+		font-size: 10px;
+	}
+
+	// Hide the bibliography number produced by some CSL styles
+	.csl-left-margin {
+		display: none;
+	}
+
+	[aria-hidden="true"] {
+		display: none;
+	}
+
+	.citation_formats {
+		margin-top: 1em;
+	}
+
+	.citation_formats_button {
+		position: relative;
+		background: transparent;
+		border: none;
+		border-bottom-left-radius: 0;
+		border-bottom-right-radius: 0;
+		box-shadow: none;
+		padding: 0 1em;
+		width: 100%;
+		text-align: left;
+
+		&:after {
+			.fa();
+			content: @fa-var-caret-down;
+			position: absolute;
+			top: 50%;
+			right: 1em;
+			transform: translateY(-50%);
+		}
+
+		&[aria-expanded="true"] {
+
+			&:after {
+				content: @fa-var-caret-up;
+			}
+		}
+
+		&:focus {
+			background: #ccc;
+			outline: 0;
+		}
+	}
+
+	.citation_formats_styles {
+		.pkp_unstyled_list;
+
+		a {
+			display: block;
+			padding: 0.5em 1em;
+			border-bottom: 1px solid #000;
+			text-decoration: none;
+
+			&:focus {
+				background: #ccc;
+				outline: 0;
+			}
+		}
+
+		li:last-child a {
+			border-bottom: none;
+		}
+	}
+
+	.citation_formats_list .label {
+		padding: 1em 1em 0.25em 1em;
+	}
+
+	.citation_formats_styles + .label {
+		border-top: 1px solid #000;
+	}
+
+	span {
+		margin-right: 0.5em;
+	}
+}
+
+
+.copyright {
+	font-size: 13px;
+	line-height: 13px;
+
+	a[rel="license"] + p {
+		margin-top: 0;
+	}
 }
