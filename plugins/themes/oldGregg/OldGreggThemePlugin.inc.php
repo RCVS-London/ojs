@@ -23,6 +23,10 @@ define("CREATE_PDF_QUERY", "download=pdf");
 class OldGreggThemePlugin extends ThemePlugin
 {
 	/**
+	 * @var string
+	 */
+	private $gtmId = false;
+	/**
 	 * Initialize the theme's styles, scripts and hooks. This is only run for
 	 * the currently active theme.
 	 *
@@ -30,6 +34,7 @@ class OldGreggThemePlugin extends ThemePlugin
 	 */
 	public function init()
 	{
+		$this->gtmId = getenv('GTM_ID');
 
 		if (!class_exists('\JATSParser\Body\Document', true)) {
 			require_once  __DIR__ . '/JATSParser/vendor/autoload.php';
@@ -66,7 +71,6 @@ class OldGreggThemePlugin extends ThemePlugin
 		$this->addStyle('jats', 'css/jats.min.css');
 		$this->addStyle('search', 'css/search.css');
 		$this->addStyle('button', 'css/button.css');
-
 		$this->addScript('jquery', 'jquery/jquery.min.js');
 		$this->addScript('popper', 'bootstrap/js/popper.min.js');
 		$this->addScript('bootstrap', 'bootstrap/js/bootstrap.min.js');
@@ -120,6 +124,7 @@ class OldGreggThemePlugin extends ThemePlugin
 		HookRegistry::register('TemplateManager::display', [$this, 'mostRead']);
 		HookRegistry::register('TemplateManager::display', [$this, 'getLatestIssue']);
 		HookRegistry::register('TemplateManager::display', [$this, 'getCategories']);
+		HookRegistry::register('TemplateManager::display', [$this, 'googleTagManagerCode']);
 	}
 
 
@@ -510,6 +515,12 @@ class OldGreggThemePlugin extends ThemePlugin
 		}
 
 		$smarty->assign('categories', $categories);
+	}
+
+	public function googleTagManagerCode($hookName, $args) {
+		$smarty = $args[0];
+
+		$smarty->assign('gtmId', $this->gtmId);
 	}
 
 	/**
