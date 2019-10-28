@@ -50,3 +50,6 @@
 [submodule "plugins/themes/rcvs-bootstrap"]
 	path = plugins/themes/rcvs-bootstrap
 	url = https://github.com/RCVS-London/trust-ojs-bootstrap3-theme.git
+[submodule "plugins/importexport/portico"]
+	path = plugins/importexport/portico
+	url = https://github.com/jmacgreg/portico.git
