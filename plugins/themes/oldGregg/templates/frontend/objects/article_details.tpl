@@ -295,6 +295,13 @@
 					{capture assign="sidebarCode"}{call_hook name="Templates::Common::Sidebar"}{/capture}
 					{if $sidebarCode}
 						<div class="pkp_structure_sidebar left" role="complementary" aria-label="{translate|escape key="common.navigation.sidebar"}">
+							<div class="pkp_block block_altmetrics" style="text-align: center; padding-bottom: 25px">
+								{literal}<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>{/literal}
+								<span class="title">Metrics</span>
+								<div data-badge-popover="right" data-badge-type="medium-donut" data-doi="10.18849/ve.v3i1.96" data-hide-no-mentions="true" class="altmetric-embed"></div>
+								<span style="text-align: center" class="__dimensions_badge_embed__" data-doi="10.1001/jama.2016.9797"></span>
+								{literal}<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>{/literal}
+							</div>
 							{$sidebarCode}
 						</div><!-- pkp_sidebar.left -->
 					{/if}
