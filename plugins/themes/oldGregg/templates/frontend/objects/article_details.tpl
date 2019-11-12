@@ -291,30 +291,30 @@
 			</div>
 			<div class="details-wrapper col-xl-3 col-lg-4">
 				{* Sidebars *}
-				{if empty($isFullWidth)}
+
 					{capture assign="sidebarCode"}{call_hook name="Templates::Common::Sidebar"}{/capture}
-					{if $sidebarCode}
+
 						<div class="pkp_structure_sidebar left" role="complementary" aria-label="{translate|escape key="common.navigation.sidebar"}">
 							{foreach from=$pubIdPlugins item=pubIdPlugin}
 								{if $pubIdPlugin->getPubIdType() != 'doi'}
 									{continue}
 								{/if}
 								{assign var=pubId value=$article->getStoredPubId($pubIdPlugin->getPubIdType())}
+								{assign var="doiUrl" value=$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
 								{if $pubId}
-									{assign var="doiUrl" value=$pubIdPlugin->getResolvingURL($currentJournal->getId(), $pubId)|escape}
 									<div class="pkp_block block_altmetrics" style="text-align: center; padding-bottom: 25px">
 										{literal}<script type='text/javascript' src='https://d1bxh8uas1mnw7.cloudfront.net/assets/embed.js'></script>{/literal}
 										<span class="title">Metrics</span>
-										<div data-badge-popover="right" data-badge-type="medium-donut" data-doi="{$currentJournal->getId()}/{$pubId}" data-hide-no-mentions="true" class="altmetric-embed"></div>
-										<span style="text-align: center" class="__dimensions_badge_embed__" data-doi="{$currentJournal->getId()}/{$pubId}"></span>
+										<div data-badge-popover="right" data-badge-type="medium-donut" data-doi="{$doiUrl|regex_replace:"/http.*org\//":""}" data-hide-no-mentions="true" class="altmetric-embed"></div>
+										<span style="text-align: center" class="__dimensions_badge_embed__" data-doi="{$doiUrl|regex_replace:"/http.*org\//":""}"></span>
 										{literal}<script async src="https://badge.dimensions.ai/badge.js" charset="utf-8"></script>{/literal}
 									</div>
 								{/if}
 							{/foreach}
 							{$sidebarCode}
 						</div><!-- pkp_sidebar.left -->
-					{/if}
-				{/if}
+
+
 			</div>
 		</div>
 	</div>
