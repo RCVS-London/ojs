@@ -1,8 +1,11 @@
-/* Site title */
+/* Site title TEST RICCARDO*/
+
+
 
 .site-title-wraper {
     background-color: #fff;
     min-height: 4em;
+    margin-top: 1px;
     padding-bottom: 5px;
 }
 .site-title-wraper a {
